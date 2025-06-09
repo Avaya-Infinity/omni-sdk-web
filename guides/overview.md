@@ -22,4 +22,4 @@ Avaya Infinity™ platform provides Omni SDK using which you can enable your cli
     - Integration Id (also known as Web Chat Id)
 
 3. Download the SDK and supporting artifacts like [SDK documentation](../docs/index.html), [sample client application](../sample-app-messaging/), and [reference backend server](https://github.com/Avaya-Infinity/omni-sdk-starter-kit).
-4. Integrate your client applications with Avaya Omni SDK to enable messaging and WebRTC calling capabilities.
+4. Integrate your client applications with Avaya Omni SDK to enable web chat capabilities.
