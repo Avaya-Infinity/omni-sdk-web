@@ -1,0 +1,28 @@
+{
+  "name": "@avaya/infinity-sample-app-messaging",
+  "version": "0.0.0-VERSION",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc && rollup --config",
+    "serve": "rollup --config --watch"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@avaya/infinity-omni-sdk-messaging-ui": "^0.0.0-VERSION",
+    "uuid": "^11.0.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/uuid": "^10.0.0",
+    "http-server": "^14.1.1",
+    "rollup": "^4.9.1",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-serve": "^1.1.1",
+    "rollup-plugin-sourcemaps2": "^0.4.1",
+    "typescript": "^5.3.3"
+  }
+}
