@@ -6,14 +6,16 @@ The Omni SDK Messaging module depends on the Omni SDK Core module. Please refer 
 
 ## Main features
 
-1. **Message History**: The Omni SDK Messaging module provides a message history feature that allows users to view all messages exchanged in a conversation thread.
-2. **Resume Conversation**: The Omni SDK Messaging module allows users to resume a messaging conversation thread at any time. This includes auto resuming the conversation initiated from another session of the same user, to converse simultaneously from multiple devices. Auto resuming might take a minute to detect an active conversation on another session.
-3. **Send Message**: The Omni SDK Messaging module allows users to send messages to other participants in a conversation thread.
-4. **Receive Message**: The Omni SDK Messaging module allows users to receive messages from other participants in a conversation thread.
-5. **Send rich media messages**: The Omni SDK Messaging module allows users to send rich media messages like Post back, replies and location to other participants in a conversation thread.
-6. **Receive rich media messages**: The Omni SDK Messaging module allows users to receive rich media messages like Post back, Replies and Location Request, Carousel etc, from other participants in a conversation thread.
-7. **Send and receive attachments**: The Omni SDK Messaging module allows users to send and receive attachments like images, videos, audio, documents etc, to other participants in a conversation thread.
-8. **Typing indicators**: The Omni SDK Messaging module enables sending typing indicator of the user and receiving typing indicator(s) of other participants in the conversation.
+1. **Message History**: Provides a message history feature that allows users to view all messages exchanged in a conversation thread.
+2. **Resume Conversation**: Allows users to resume a messaging conversation thread at any time. This includes auto resuming the conversation initiated from another session of the same user, to converse simultaneously from multiple devices. Auto resuming might take a minute to detect an active conversation on another session.
+3. **Canned Messages**: Generates messages configured by the account admin for the web chat integration, if the user has not sent the first message on the conversation.
+4. **Send Message**: Allows users to send messages to other participants in a conversation thread.
+5. **Receive Message**: Allows users to receive messages from other participants in a conversation thread.
+6. **Receive rich media messages**: Supports quick reply rich media messages allowing dynamic and engaging content within the messaging interface.
+7. **Send rich media messages**: Supports response to quick reply rich media messages.
+8. **Send and receive attachments**: Allows users to send and receive attachments like images, videos, audio, documents etc, to other participants in a conversation thread.
+9. **Typing indicators**: Enables sending typing indicator of the user and receiving typing indicator(s) of other participants in the conversation.
+10. **Download Transcript:** Allows users to download the conversation transcript, once the conversation is closed.
 
 ## Installation
 

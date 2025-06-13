@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Omni SDK Core module provides a set of basic functionalities to initialize, shutdown the SDK, and get the default conversation of the end user. The Omni SDK Core establishes the session with Avaya Infinity™ platform for the end user, manages the session inactivity, and participants involved in the conversation.
+The Omni SDK Core module provides a set of basic functionalities to initialize, shutdown the SDK, and create and end conversation for the end user. The Omni SDK Core establishes the session with Avaya Infinity™ platform for the end user, manages the session inactivity, and participants involved in the conversation.
 
 ## Installation
 
@@ -22,7 +22,7 @@ import { AvayaInfinityOmniSdk } from "@avaya/infinity-omni-sdk-core";
 
 ### Prerequisites
 
-Before using the Avaya Infinity Omni SDK refer to [this page](https://developers.avayacloud.com/avaya-experience-platform/docs/omni-sdk-introduction#next-steps) for a list of prerequisites.
+Before using the Avaya Infinity™ Omni SDK refer to [this section](./README.md#next-steps) for a list of prerequisites.
 
 ### Using additional functionalities
 
@@ -103,7 +103,7 @@ Before any operation can be performed with the SDK, it must be initialized. The 
 Initialization can be done by calling the static method `init()` on the class `AvayaInfinityOmniSdk`. The `init()` method takes two arguments:
 
 1. `initParams`: An object which has all the initialization parameters and configurations.
-2. `AdditionalFunctionality`: A Conversation class enhanced by applying the [additional functionalities](#using-additional-functionalities) using mixins.
+2. `EnhancedConversationClass`: A Conversation class enhanced by applying the [additional functionalities](#using-additional-functionalities) using mixins.
 
 Initialization Example:
 
@@ -114,10 +114,10 @@ import { MessagingConversation } from '@avaya/infinity-omni-sdk-messaging';
 const EnhancedConversationClass = MessagingConversation();
 
 const initParams = {
-    host: 'na'
+    host: '<avaya-infinity-hostname>',
     integrationId: '<integrationId>',
     token: '<JWT>',
-    JwtProvider: new MyJwtProvider(),
+    jwtProvider: new MyJwtProvider(),
     displayName: 'John Doe',
     logLevel: 'debug',
     idleTimeoutDuration: 5 * 60 * 1000, // in milliseconds
@@ -135,7 +135,8 @@ Being an `async` method, the Client can `await` on the promise returned by the `
 
 Alternatively, the SDK emits an initialized event after the SDK initialization has completed. The Client can listen to these events by providing a listener function to SDK.
 
-**Important: In order to receive the initialized event, it is imperative to provide the listener function before calling the `init()` method.**
+> [!IMPORTANT]
+> In order to receive the initialized event, it is imperative to provide the listener function before calling the `init()` method.
 
 ```ts
 AvayaInfinityOmniSdk.addSdkInitializedListener((userSession) => {
@@ -155,28 +156,26 @@ The Core Conversation contains -
 - Method to get the details of the participants involved in the conversation.
 - Method to provide listeners for the participant change events.
 - Method to set the context parameters used for routing.
+- Method to end the conversation.
 - Property `conversationId`.
+- Property to know the current state of the conversation.
 
-**💡 INFO: Based on [additional functionality](#using-additional-functionalities) that is included, the conversation will have additional properties and methods. Check out the documentation of each functionality that has been added to know more about the methods that it adds on to the Conversation.**
+> [!INFO]
+> Based on [additional functionality](#using-additional-functionalities) that is included, the conversation will have additional properties and methods. Check out the documentation of each functionality that has been added to know more about the methods that it adds on to the Conversation.
 
-**❗ NOTE: On initialization, the default Conversation for the user gets automatically created on Avaya Infinity™ platform. The default conversation of the user never ends and currently the only conversation that the user can use.**
+#### Creating a Conversation
 
-The default conversation can be accessed from the `UserSession` object returned by the `init()` method.
-
-```ts
-// Arguments are not shown for brevity, refer to the Initialization section for the complete initialization example.
-const userSession = await AvayaInfinityOmniSdk.init(...);
-
-const conversation = userSession.conversations[0];
-```
-
-Alternatively, the `AvayaInfinityOmniSdk` class exposes another method `getDefaultConversation()` which returns the default conversation object. Important thing to note here is that this method can be called only after the SDK has been initialized.
+To create a conversation, invoke the static method `createConversation()` on the `AvayaInfinityOmniSdk` class. It takes 'EnhancedConversationClass' as an optional argument, which is the class that has been enhanced by applying the additional functionalities using mixins. If not provided, the `CoreConversation` class will be used.
 
 ```ts
-const userSession = await AvayaInfinityOmniSdk.init(...);
-
-const conversation = AvayaInfinityOmniSdk.getDefaultConversation();
+const EnhancedConversationClass = MessagingConversation();
+const conversation = await AvayaInfinityOmniSdk.createConversation(EnhancedConversationClass);
 ```
+
+[!IMPORTANT]
+> The `createConversation()` method can only be called after the SDK has been initialized.
+> The class provided as an argument to the `createConversation()` method must be the same class that was used when `init()` was called.
+> At a time only one conversation can be created for the current user. If a conversation already exists, the `createConversation()` method will throw an error.
 
 #### Context Parameters
 
@@ -227,6 +226,23 @@ const participantDisconnectedHandlerId = conversation.addParticipantDisconnected
 
 // To remove the listener
 conversation.removeParticipantDisconnectedListener(participantDisconnectedHandlerId);
+```
+
+#### Ending a Conversation
+
+To end the conversation, call the `end()` method on the conversation object. This will end the conversation for the current user. This method returns a `Promise` that resolves when the conversation has been successfully ended and all the associated channels are closed.
+
+```ts
+await conversation.end();
+```
+
+An `ConversationEnded` event is emitted after the conversation has been successfully ended. The consumers can listen to this event by providing a listener function to the conversation object. The same event is also emitted when the conversation is ended by the Contact Center.
+
+```ts
+conversation.addConversationEndedListener((event) => {
+    console.log("Conversation with ID:", event.conversationId, "Ended");
+    // ... your cleanup code.
+});
 ```
 
 ### User Activity
@@ -302,8 +318,7 @@ To shut down the SDK, call the `shutdown()` method on the `AvayaInfinityOmniSdk`
 await AvayaInfinityOmniSdk.shutdown();
 ```
 
-> **! Important**
->
+> [!IMPORTANT]
 > Once the SDK is shutdown the Conversation object(s) are also removed, hence the Client must re-initialize the SDK incase it wants to start again. However, this doesn't close the conversation of the User. Post re-initialization, the User can continue the conversation from where it was left.
 
 Similar to the initialization process, the SDK emits a shutdown event after the SDK has been successfully shut down. The consumers can listen to these events by providing a listener function to SDK.
