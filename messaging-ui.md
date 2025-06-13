@@ -160,7 +160,8 @@ import { AvayaInfinityOmniSdkMessagingUi } from "@avaya/infinity-omni-sdk-messag
 
 Once imported, the instance can be procured by using the static method `getInstance()` on the class `AvayaInfinityOmniSdkMessagingUi`. The `init` method can then be called on the returned instance object to initialize the Avaya Infinity Omni SDK Messaging UI.
 
-**⚠️ Important Note: Currently Avaya Infinity Omni SDK Messaging UI supports a single instance, using multiple instances of the `<avaya-infinity-omni-sdk-messaging-ui>` can lead to unpredictable behavior.**
+[!IMPORTANT]
+**Currently Avaya Infinity Omni SDK Messaging UI supports a single instance, using multiple instances of the `<avaya-infinity-omni-sdk-messaging-ui>` can lead to unpredictable behavior.**
 
 **Example:**
 

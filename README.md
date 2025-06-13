@@ -1,6 +1,6 @@
 # Avaya Infinity™ Omni SDK - Web
 
-> **:warning: Disclaimer**
+> [!WARNING]
 >
 > Installing, downloading, copying or using this SDK is subject to terms and conditions available in the LICENSE.
 

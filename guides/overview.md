@@ -22,7 +22,10 @@ Avaya Infinity™ platform provides Omni SDK using which you can enable your cli
      - Avaya Infinity™ hostname
      - WebChat Integration Id
 
-3. Download the Omni SDK and supporting artifacts like [SDK documentation](../docs/index.html), [sample client application](../sample-app-messaging/), and [reference backend server](https://github.com/Avaya-Infinity/omni-sdk-starter-kit).
+3. Refer the Omni SDK supporting artifacts:
+   - [SDK documentation](../docs/index.html)
+   - [Sample Web Chat Client Application](../sample-app-messaging/)
+   - [Reference Backend Server](https://github.com/Avaya-Infinity/omni-sdk-starter-kit)
 4. Integrate your client applications with Avaya Omni SDK to enable web chat capabilities.
 
 ## Overview
@@ -57,37 +60,23 @@ The Omni SDK requires a JSON Web Token (JWT) to connect to Avaya Infinity™ ser
 
 ![Omni SDK Authorization](images/omni-sdk-auth.png)
 
-In order to fetch the JWT from Avaya Infinity™, your backend web application server needs to invoke the following API:
-
-```
-https://<avaya-infinity-hostname>/auth/realms/avaya/protocol/openid-connect/token
-```
-
-Users using your web application services can be categorized into verified (authenticated or logged-in) and unverified (guest) users.
-
-While invoking the API to generate the JWT, the backend web application can specify if the token is being generated for a verified user by setting `verifiedCustomer` to `true`. For verified users, the backend web application must set the `customerId` to a value it uses to identify or trace the user so that Avaya Infinity™ is also able the trace multiple sessions of the same user. It should also pass valid information in the `customerIdentifiers` field so that Avaya Infinity™ is able to build the Customer Journey across multiple channels.
-
-For unverified users, if the backend application does not have any id for the user, it can set the `customerId` to a random Id as `customerIdentifiers` are anyways ignored for unverified users.
-
-The JWT is short lived and expires after 15 minutes (by default, expiry time can be set between 15 to 60 minutes while your Backend Web App server requests to create the JWT). Your client application must implement the `JwtProvider` interface of the Omni SDK. The 'fetchJwt()' method of this interface will be invoked by the Omni SDK 3 minutes before the token is about to expire so that your application can request your backend web application for a new token and return it back to the Omni SDK.
+In order to fetch the JWT from Avaya Infinity™, your backend web application server needs to invoke [this API](doc:generate-jwt-api) with the required parameters. The API will return a JWT that your client application must use to initialize the Omni SDK.
 
 ## Sample Backend Web Application Server
 
-To help you change your backend web application server to fetch JWT for your client applications, a sample backend web application is available for reference [here](https://github.com/AvayaExperiencePlatform/omni-sdk-starter-kit/tree/master/%20%20sample-web-app-server). You can also run this Node.js application (after providing some basic configuration) to quickly test fetching JWTs for your Client Application. Note that this is just a sample application and not meant to be directly used in production.
+To help you change your backend web application server to fetch JWT for your client applications, a sample backend web application is available for reference [here](https://github.com/Avaya-Infinity/omni-sdk-starter-kit). You can also run this Node.js application (after providing some basic configuration) to quickly test fetching JWTs for your Client Application. Note that this is just a sample application and not meant to be directly used in production.
 
 ## Using the Omni SDK
 
-Once you have implemented the `JwtProvider` interface to fetch the JWT from your backend web application service, you must configure the Omni SDK the JWT and provide the required parameters like `region`, `integrationId`, instance of the implementation of `JwtProvider`, `appKey`, etc. Once the Omni SDK is configured successfully, you can retrieve the default Conversation for the user that gets automatically created on Avaya Infinity™. The user can exchange messages and make calls on this Conversation. The default conversation of the user never ends and currently the only conversation user can use. If the user accesses your application from multiple devices and the same `customerId` is used while generating the JWT, the user will be able to view and resume the same default conversation from any of the devices.
-
-The Omni SDK contains the following modules:
+Once you have implemented the `JwtProvider` interface to fetch the JWT from your backend application service, you can start using the Omni SDK in your client application. The Omni SDK is modular and consists of three main modules namely Core, Messaging, and Messaging UI. These modules can be used independently or together based on your requirements.
 
 ### Core
 
-Provides the basic functionality to configure the Omni SDK and retrieve the default conversation of the user. Core establishes the session with Avaya Infinity™ for the end user.
+Provides the basic functionality to configure the Omni SDK, start and end a conversation for the user. Core establishes the session with Avaya Infinity™ for the end user.
 
 ### Messaging
 
-Provides capability to send messages and listen to participant and message events on the conversation. This module is dependent on the Core module.
+Provides capability to send messages and listen to events occurring on the conversation. This module is dependent on the Core module.
 
 ### Messaging UI
 
@@ -97,25 +86,17 @@ Provides a built-in Messaging UI component to view the messages exchanged on the
 
 Each module is packaged as a separate library. You can select the modules that are necessary to meet your business requirements and include them exclusively into your client application. Since every module depends on the Core module, using any of the modules will need having the Core module included, either implicitly or explicitly.
 
-Here are a few examples of scenarios:
+### Scenarios
 
-- **Message Only Integration (with Built-in UI)**
+- **Use the Avaya Infinity™ Built-in Messaging UI**
 
-  If your client application only needs to AXP Messaging capabilities, you need to include the following modules:
+  If you need to simply add the Avaya Infinity™ Web Chat capabilities to your client application, the easiest way is to use the built-in Messaging UI provided by our Omni SDK. In this case, you need to include the following modules:
   - **Core** module
   - **Messaging** module
   - **Messaging UI** module
 
-- **Message Only Integration (without Built-in UI)**
+- **Integrate Avaya Infinity™ Omni SDK with your own Messaging UI**
 
-  If you do not want to leverage the built-in Messaging UI provided by our Omni SDK, but only want to leverage the AXP Messaging using you own UI, you need to include the following modules:
+  If you want to integrate your own Chat UI with Avaya Infinity™, you need to include the following modules:
   - **Core** module
   - **Messaging** module
-
-The following sections will help you get started on integrating your Android, iOS or Web Client Applications with Avaya Infinity™ Omni SDK
-
-[Android SDK](doc:omni-android-sdk)
-
-[iOS SDK](doc:omni-ios-sdk)
-
-[Web SDK](doc:omni-web-sdk)
