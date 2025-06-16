@@ -46,7 +46,7 @@ This JavaScript based sample web application demonstrates how to quickly integra
    Start the web application by running the following command:
 
    ```bash
-   npm serve
+   npm run serve
    ```
 
    By default the sample web application will start listening on port `8080`. Check the console logs to confirm the port of the application.
