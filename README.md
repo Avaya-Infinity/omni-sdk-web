@@ -24,9 +24,9 @@ Avaya Infinity™ platform provides Omni SDK using which you can enable your cli
      - URL of your Backend Web App Service (to fetch JWT)
 
 3. Refer the Omni SDK supporting artifacts:
-   - [SDK documentation](./docs/index.html)
+   - [SDK documentation](https://glowing-carnival-jnk6qpo.pages.github.io/)
    - [Sample Web Chat Client Application](./sample-app-messaging/)
-   - [Reference Backend Server](https://github.com/Avaya-Infinity/omni-sdk-starter-kit)
+   - [Sample Backend Server](https://github.com/Avaya-Infinity/omni-sdk-starter-kit)
 4. Integrate your client applications with Avaya Omni SDK to enable web chat capabilities.
 
 ## Overview
