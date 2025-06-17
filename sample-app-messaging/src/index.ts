@@ -60,7 +60,7 @@ const locationRequestHandle = () =>
 async function loadMessagingUi() {
 	const messagingUiConfig = {
 		themeCustomizations: themes,
-		initialTheme: "professional",
+		// initialTheme: "professional", // Enable this to use your own custom theme defined in ./customization/themes.ts
 		displayStrings: displayStrings,
 		host: Configs.avayaInfinityHost,
 		integrationId: Configs.integrationId,
