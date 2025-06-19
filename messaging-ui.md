@@ -1,8 +1,8 @@
 # Omni SDK Messaging UI
 
-Avaya Infinity™ Omni SDK Messaging UI provides a highly customizable user interface as a [Web Component](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) for messaging that can be easily integrated into the Client website to enable messaging capabilities.
+Avaya Infinity™ Omni SDK Messaging UI provides a highly customizable ready-made user interface as a [Web Component](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) enabling you to easily add Avaya Infinity™ chat capabilities into your Client website.
 
-The Omni SDK Messaging UI is build on top of [Omni SDK Core](./core.md) and [Omni SDK Messaging](./messaging.md) SDKs. Before using the Avaya Infinity™ Omni SDK Messaging UI, please refer to [this page](https://developers.avayacloud.com/avaya-experience-platform/docs/omni-sdk-introduction#next-steps) for a list of prerequisites.
+The Omni SDK Messaging UI is build on top of [Omni SDK Core](./core.md) and [Omni SDK Messaging](./messaging.md) SDKs. Before using the Avaya Infinity™ Omni SDK Messaging UI, please refer to [this page](./README.md#next-steps) for a list of prerequisites.
 
 ## Features
 
