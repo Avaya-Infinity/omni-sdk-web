@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Avaya Infinity™ platform provides Omni SDK using which you can enable your client applications with messaging and call capabilities of Avaya Infinity™ platform. The Omni SDK is a set of libraries that provide a collection of methods, objects, events and UI components that will allow you to easily integrate your client applications.
+Avaya Infinity™ platform provides Omni SDK using which you can enable your client applications with chat capabilities of Avaya Infinity™ platform. The Omni SDK is a set of libraries that provide a collection of methods, objects, events and UI components that will allow you to easily integrate your client applications.
 
 ## Next Steps
 
@@ -61,7 +61,10 @@ The Omni SDK requires a JSON Web Token (JWT) to connect to Avaya Infinity™ ser
 
 ![Omni SDK Authorization](images/omni-sdk-auth.png)
 
-In order to fetch the JWT from Avaya Infinity™, your backend web application server needs to invoke [this API](doc:generate-jwt-api) with the required parameters. The API will return a JWT that your client application must use to initialize the Omni SDK.
+In order to fetch the JWT from Avaya Infinity™, your backend web application server needs to invoke [this API](https://github.com/Avaya-Infinity/omni-sdk-web/blob/main/generate-jwt-api.md) with the required parameters. The API will return a JWT that your client application must use to initialize the Omni SDK.
+
+> [!Important]
+> Ensure your backend web application does not expose the clientId and secret required to call the [Generate JWT API](https://github.com/Avaya-Infinity/omni-sdk-web/blob/main/generate-jwt-api.md) to your client applications, which is the main reason why the JWT is fetched by your backend web application server. If the clientId and secret are exposed to the end user's device, they could be misused.
 
 ## Sample Backend Web Application Server
 
