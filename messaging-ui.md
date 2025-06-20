@@ -1,8 +1,8 @@
 # Omni SDK Messaging UI
 
-Avaya Infinity™ Omni SDK Messaging UI provides a highly customizable user interface as a [Web Component](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) for messaging that can be easily integrated into the Client website to enable messaging capabilities.
+Avaya Infinity™ Omni SDK Messaging UI provides a highly customizable ready-made user interface as a [Web Component](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) enabling you to easily add Avaya Infinity™ chat capabilities into your Client website.
 
-The Omni SDK Messaging UI is build on top of [Omni SDK Core](./core.md) and [Omni SDK Messaging](./messaging.md) SDKs. Before using the Avaya Infinity™ Omni SDK Messaging UI, please refer to [this page](https://developers.avayacloud.com/avaya-experience-platform/docs/omni-sdk-introduction#next-steps) for a list of prerequisites.
+The Omni SDK Messaging UI is build on top of [Omni SDK Core](./core.md) and [Omni SDK Messaging](./messaging.md) SDKs. Before using the Avaya Infinity™ Omni SDK Messaging UI, please refer to [this page](./README.md#next-steps) for a list of prerequisites.
 
 ## Features
 
@@ -131,7 +131,7 @@ window.onload = () => {
 
 The Messaging UI doesn't authenticate the User. It expects the User to be authenticated by your website and its backend web application. The Messaging UI uses JSON Web Tokens (JWT) and requires a valid JWT to function. The JWT is obtained from your own backend web application that communicates with Avaya Infinity™ platform's authentication API.
 
-The Messaging UI expects an implementation of the `JwtProvider` interface to be provided during [initialization](#initialization). The `JwtProvider` implementation must have two methods:
+The Messaging UI expects an implementation of the [`JwtProvider`](https://glowing-carnival-jnk6qpo.pages.github.io/interfaces/_avaya_infinity_omni_sdk_messaging_ui.JwtProvider.html) interface to be provided during [initialization](#initialization). The implementation of this interface must implement these methods:
 
 1. `onExpiryWarning`: This method will be invoked to notify that the JWT is about to expire. It provides the remaining time before expiration. Your implementation should ideally use this time to fetch a new JWT and set it in the Messaging UI to maintain a seamless user experience.
 2. `onExpiry`: This method will be invoked to notify that the JWT has expired and the services provided by Messaging UI have been disrupted. When invoked, fetch a new JWT and immediately set it in Messaging UI to resume its services.
@@ -288,11 +288,11 @@ The Messaging UI provides a static method `resetIdleTimeout()` on the class `Ava
 
 ### Custom display strings and translations
 
-The Messaging UI provides an option to customize the display strings used in the UI. This can be done by providing the `displayStrings` configuration during [initialization](#configuration).
+The Messaging UI provides an option to customize the display strings used in the UI. This can be done by providing the `displayStrings` configuration during [configuration](#configuration).
 
-Check out the [`DisplayStrings`](https://github.com/Avaya-Infinity/omni-sdk-web/types/_avaya_infinity_omni_sdk_messaging_ui.DisplayStrings.html) type exported by the Messaging UI to know the strings that can be customized.
+Check out the [`DisplayStrings`](https://glowing-carnival-jnk6qpo.pages.github.io/types/_avaya_infinity_omni_sdk_messaging_ui.DisplayStrings.html) type exported by the Messaging UI to know the strings that can be customized.
 
-The `displayNames` property of the `DisplayStrings` can take either [`TextConfig`](https://github.com/Avaya-Infinity/omni-sdk-web/types/_avaya_infinity_omni_sdk_messaging_ui.TextConfig.html) or [`displayNameModifier`](https://github.com/Avaya-Infinity/omni-sdk-web/types/_avaya_infinity_omni_sdk_messaging_ui.DisplayNameModifier.html) callback function as a value for each of the participants. This function provides participant name as the parameter and expects a string in return.
+The `displayNames` property of the `DisplayStrings` can take either [`TextConfig`](https://glowing-carnival-jnk6qpo.pages.github.io/types/_avaya_infinity_omni_sdk_messaging_ui.TextConfig.html) or [`displayNameModifier`](https://glowing-carnival-jnk6qpo.pages.github.io/types/_avaya_infinity_omni_sdk_messaging_ui.DisplayNameModifier.html) callback function as a value for each of the participants. This function provides participant name as the parameter and expects a string in return.
 
 The locale of the messaging UI can be changed by calling the static method `setLocale()` on the class `AvayaInfinityOmniSdkMessagingUi`, which takes the locale string as an argument.
 
@@ -319,7 +319,7 @@ Themes can be changed at runtime by calling the static method `applyTheme()` on 
 
 You can switch back to the default theme by calling the static method `applyDefaultTheme()` on the class `AvayaInfinityOmniSdkMessagingUi`.
 
-The [`MessagingUiTheme`](https://github.com/Avaya-Infinity/omni-sdk-web/types/_avaya_infinity_omni_sdk_messaging_ui.MessagingUiTheme.html) type exported by the Messaging UI provides the structure of the theme object and all available options that can be changed. The options are organized by the various areas in the UI.
+The [`MessagingUiTheme`](https://glowing-carnival-jnk6qpo.pages.github.io/types/_avaya_infinity_omni_sdk_messaging_ui.MessagingUiTheme.html) type exported by the Messaging UI provides the structure of the theme object and all available options that can be changed. The options are organized by the various areas in the UI.
 
 > [!NOTE]
 > Browsers on iOS devices may auto zoom on the input fields if their fontSize is less than `16px`. To avoid this behavior, the `fontSize` of the `textInput` field in the theme configuration should be set to `16px` or more.

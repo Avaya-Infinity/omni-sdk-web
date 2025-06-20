@@ -59,7 +59,7 @@ const userSession = await AvayaInfinityOmniSdk.init(..., EnhancedConversationCla
 
 The Avaya Infinity Omni SDK uses JSON Web Tokens (JWT) for client authentication and requires a valid JWT to function. The JWT is obtained from your own backend web application that communicates with Avaya Infinity™ platform's authentication API.
 
-The SDK expects an implementation of the `JwtProvider` interface to be provided during [initialization](#initialization). The `JwtProvider` implementation must have two methods:
+The SDK expects an implementation of the [`JwtProvider`](https://glowing-carnival-jnk6qpo.pages.github.io/interfaces/_avaya_infinity_omni_sdk_core.JwtProvider.html) interface to be provided during [initialization](#initialization). The implementation of this interface must implement these methods:
 
 1. `onExpiryWarning`: This method is called when the JWT is about to expire. In the argument of this method, the remaining time in milliseconds before the JWT expires is provided.
 2. `onExpiry`: This method is called when the JWT has expired.
@@ -160,7 +160,7 @@ The Core Conversation contains -
 - Property `conversationId`.
 - Property to know the current state of the conversation.
 
-> [!INFO]
+> [!NOTE]
 > Based on [additional functionality](#using-additional-functionalities) that is included, the conversation will have additional properties and methods. Check out the documentation of each functionality that has been added to know more about the methods that it adds on to the Conversation.
 
 #### Creating a Conversation
@@ -172,7 +172,7 @@ const EnhancedConversationClass = MessagingConversation();
 const conversation = await AvayaInfinityOmniSdk.createConversation(EnhancedConversationClass);
 ```
 
-[!IMPORTANT]
+> [!IMPORTANT]
 > The `createConversation()` method can only be called after the SDK has been initialized.
 > The class provided as an argument to the `createConversation()` method must be the same class that was used when `init()` was called.
 > At a time only one conversation can be created for the current user. If a conversation already exists, the `createConversation()` method will throw an error.
