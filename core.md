@@ -59,7 +59,7 @@ const userSession = await AvayaInfinityOmniSdk.init(..., EnhancedConversationCla
 
 The Avaya Infinity Omni SDK uses JSON Web Tokens (JWT) for client authentication and requires a valid JWT to function. The JWT is obtained from your own backend web application that communicates with Avaya Infinity™ platform's authentication API.
 
-The SDK expects an implementation of the [`JwtProvider`](https://glowing-carnival-jnk6qpo.pages.github.io/interfaces/_avaya_infinity_omni_sdk_core.JwtProvider.html) interface to be provided during [initialization](#initialization). The implementation of this interface must implement these methods:
+The SDK expects an implementation of the [`JwtProvider`](https://avaya-infinity.github.io/omni-sdk-web/interfaces/_avaya_infinity_omni_sdk_core.JwtProvider.html) interface to be provided during [initialization](#initialization). The implementation of this interface must implement these methods:
 
 1. `onExpiryWarning`: This method is called when the JWT is about to expire. In the argument of this method, the remaining time in milliseconds before the JWT expires is provided.
 2. `onExpiry`: This method is called when the JWT has expired.
