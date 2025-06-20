@@ -84,7 +84,7 @@ Provides capability to send messages and listen to events occurring on the conve
 
 ### Messaging UI
 
-Provides a built-in Messaging UI component to view the messages exchanged on the conversation and send messages or attachments. The module is dependent on Messaging and Core modules. The look and feel of the Messaging UI component is highly customizable so that you can blend it with your application’s theme. It takes care of rendering the rich media action buttons and sending the respective response from the user. Using this module is the quickest and easiest way to add Avaya Infinity™ Web Chat capabilities into your client application. More details about the Messaging UI module can be found [here](./messaging-ui.md).
+Provides a built-in Messaging UI component to view the messages exchanged on the conversation and send messages or attachments. The module is dependent on [Core](#core) and [Messaging](#messaging) modules. The look and feel of the Messaging UI component is highly customizable so that you can blend it with your application’s theme. It takes care of rendering the rich media action buttons and sending the respective response from the user. Using this module is the quickest and easiest way to add Avaya Infinity™ Web Chat capabilities into your client application. More details about the Messaging UI module can be found [here](./messaging-ui.md).
 
 ## Combining the Modules
 
@@ -94,11 +94,11 @@ Each module is packaged as a separate library. You can select the modules that a
 
 - **Use the Avaya Infinity™ Built-in Messaging UI**
 
-  If you need to simply add the Avaya Infinity™ Web Chat capabilities to your client application, the easiest way is to use the built-in Messaging UI provided by our Omni SDK. In this case, you need to include the [**Messaging UI**](#messaging-ui) module. It will automatically include the [**Core**](#core) and [**Messaging**](#messaging) modules as dependencies.
+  If you need to simply add the Avaya Infinity™ Web Chat capabilities to your client application, the easiest way is to use the built-in Messaging UI provided by our Omni SDK. In this case, you need to include the **[Messaging UI](#messaging-ui)** module. It will automatically include the **[Core](#core)** and **[Messaging](#messaging)** modules as dependencies.
 
 - **Integrate Avaya Infinity™ Omni SDK with your own chat UI**
 
-  If you want to integrate your own Chat UI with Avaya Infinity™, you need to include the [**Messaging**](#messaging) module, which will automatically include the [**Core**](#core) module as a dependency.
+  If you want to integrate your own Chat UI with Avaya Infinity™, you need to include the **[Messaging](#messaging)** module, which will automatically include the **[Core](#core)** module as a dependency.
 
 ## License
 
