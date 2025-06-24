@@ -8,6 +8,7 @@ const User = {
 		phoneNumbers: ["<phone number>"], // User's phone number
 	}
 };
+
 export const Authenticator = {
 	async fetchToken() {
 		console.log("Fetching JWT token for user:", User);
