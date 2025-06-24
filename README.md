@@ -4,30 +4,45 @@
 
 The Avaya Infinity™ platform provides the Omni SDK, which enables you to add the chat capabilities of the Avaya Infinity™ platform to your client applications. The Omni SDK is a set of libraries that provides APIs and UI components designed to facilitate the seamless integration of Avaya Infinity Omni channel functionalities into your client applications.
 
+## Quick Start
+
+To quickly get started with the Omni SDK and try out the web chat capabilities, get the necessary [Web Chat integration details and credentials](#details-required-for-web-chat-integration) from your account administrator, and follow these steps:
+
+1. Run the **Sample Backend Web App**
+   - Clone or download the **Sample Backend Web App** repository from [GitHub](https://github.com/Avaya-Infinity/omni-sdk-starter-kit).
+   - Configure the **Sample Backend Web App** with the necessary Avaya Infinity™ credentials and settings and run the Node.js server. Refer the instructions in the [README](https://github.com/Avaya-Infinity/omni-sdk-starter-kit/tree/main/sample-web-app-server).
+2. Run the **Sample Messaging Client Application**
+   - Clone or download the Omni SDK Web repository from [GitHub](https://github.com/Avaya-Infinity/omni-sdk-web).
+   - Configure the **Sample Messaging Client Application** with the necessary Avaya Infinity™ settings and the **Sample Backend Web App** details. Run the Node.js application. Refer the instructions in the [README](sample-app-messaging).
+3. Launch the **Sample Messaging Client Application** in a web browser and start a chat conversation.
+
 ## Next Steps
 
 1. Review the key components and integration flow involved to achieve Omni SDK integration in the [Overview](#overview) section.
-2. Reach out to your Avaya Infinity™ account administrator to obtain appropriate access information for a Web Chat integration, like:
-
-   - For your Backend Web App (To generate JWT):
-  
-     - Avaya Infinity™ hostname
-     - Account Id
-     - Web Chat Integration Id
-     - Client Id
-     - Client Secret
-
-   - For using the Omni SDK:
-
-     - Avaya Infinity™ hostname
-     - Web Chat Integration Id
-     - URL of your Backend Web App Service (to fetch JWT)
-
+2. Reach out to your Avaya Infinity™ account administrator to obtain appropriate [access information for a Web Chat integration](#details-required-for-web-chat-integration).
 3. Refer to these supporting artifacts:
    - [Omni SDK API documentation](https://avaya-infinity.github.io/omni-sdk-web/)
    - [Sample Web Chat Client Application](./sample-app-messaging/)
    - [Sample Backend Server](https://github.com/Avaya-Infinity/omni-sdk-starter-kit)
 4. Integrate your client applications with Avaya Omni SDK to enable web chat capabilities.
+
+### Details Required for Web Chat Integration
+
+To integrate your client application with Avaya Infinity™ Omni SDK for web chat capabilities, you need to gather some essential details and credentials. Reach out to your Avaya Infinity™ account administrator to obtain the following information:
+
+- For your Backend Web App (To generate JWT):
+
+  - Avaya Infinity™ hostname
+  - Account Id
+  - Web Chat Integration Id
+  - Client Id
+  - Client Secret
+
+- For using the Omni SDK:
+
+  - Avaya Infinity™ hostname
+  - Web Chat Integration Id
+  - URL of your Backend Web App Service (to fetch JWT)
 
 ## Overview
 
