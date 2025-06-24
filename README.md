@@ -13,7 +13,7 @@ To quickly get started with the Omni SDK and try out the web chat capabilities, 
    - Configure the **Sample Backend Web App** with the necessary Avaya Infinity™ credentials and settings and run the Node.js server. Refer the instructions in the [README](https://github.com/Avaya-Infinity/omni-sdk-starter-kit/tree/main/sample-web-app-server).
 2. Run the **Sample Messaging Client Application**
    - Clone or download the Omni SDK Web repository from [GitHub](https://github.com/Avaya-Infinity/omni-sdk-web).
-   - Configure the **Sample Messaging Client Application** with the necessary Avaya Infinity™ settings and the **Sample Backend Web App** details. Run the Node.js application. Refer the instructions in the [README](sample-app-messaging).
+   - Configure the **Sample Messaging Client Application** with the necessary Avaya Infinity™ settings and the **Sample Backend Web App** details. Build and run the Node.js application. Refer the instructions in the [README](sample-app-messaging).
 3. Launch the **Sample Messaging Client Application** in a web browser and start a chat conversation.
 
 ## Next Steps
