@@ -3,7 +3,7 @@
 import "./config";
 import "@avaya/infinity-omni-sdk-messaging-ui";
 import { Authenticator } from "./auth";
-import { AvayaInfinityOmniSdkMessagingUi, Coordinates, JwtProvider } from "@avaya/infinity-omni-sdk-messaging-ui";
+import { AvayaInfinityOmniSdkMessagingUi, JwtProvider } from "@avaya/infinity-omni-sdk-messaging-ui";
 import { Configs } from "./config";
 import themes from "./customization/themes";
 import displayStrings from "./customization/display-strings";
@@ -32,7 +32,6 @@ async function initOnMessageBubbleClicked(instance: AvayaInfinityOmniSdkMessagin
 			jwt: await Authenticator.fetchToken(),
 			userName: Authenticator.getUser().userName,
 			contextParameters: Configs.contextParameters, // change to whatever parameters you would like to send
-			sessionParameters: { example: "sessionParameter" },
 		});
 	} catch (e) {
 		console.log("Error while initializing avaya-infinity-omni-sdk-messaging-ui", e);
@@ -40,33 +39,17 @@ async function initOnMessageBubbleClicked(instance: AvayaInfinityOmniSdkMessagin
 	}
 }
 
-//location handler with promise
-const locationRequestHandle = () =>
-	new Promise<{ coordinates: Coordinates }>((resolve, reject) => {
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition((position) => {
-				resolve({
-					coordinates: {
-						lat: position.coords.latitude,
-						long: position.coords.longitude,
-					},
-				});
-			}, reject);
-		} else {
-			reject(new Error("Geolocation is not supported by this browser."));
-		}
-	});
-
 async function loadMessagingUi() {
 	const messagingUiConfig = {
 		themeCustomizations: themes,
-		// initialTheme: "professional", // Enable this to use your own custom theme defined in ./customization/themes.ts
+		// initialTheme: "professional", // <-- Enable this to use your own custom theme defined in ./customization/themes.ts
 		displayStrings: displayStrings,
 		host: Configs.avayaInfinityHost,
 		integrationId: Configs.integrationId,
 		idleTimeoutDuration: Configs.idleTimeoutDuration,
 		logLevel: Configs.logLevel,
 		idleShutdownGraceTimeoutDuration: Configs.idleShutdownGraceTimeoutDuration,
+
 		onIdleTimeOut: function (instance: any) {
 			console.log("onIdleTimeOut", instance.name);
 		},
@@ -78,9 +61,7 @@ async function loadMessagingUi() {
 			console.log("onShutdown get initialized", instance.initialized);
 		},
 
-		onMessageBubbleClicked: initOnMessageBubbleClicked,
-
-		onLocationRequest: locationRequestHandle,
+		onMessageBubbleClicked: initOnMessageBubbleClicked
 	};
 	try {
 		const token = await Authenticator.fetchToken();
