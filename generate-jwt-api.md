@@ -13,7 +13,7 @@ To authorize your client application to use the Omni SDK, you need to generate a
 ### Endpoint
 
 ```HTTP
-POST https://<avaya-infinity-hostname>/auth/realms/avaya/protocol/openid-connect/token
+POST https://<avaya-infinity-hostname>/auth/realms/<account_id>/protocol/openid-connect/token
 ```
 
 ### Request Headers
@@ -44,15 +44,15 @@ POST https://<avaya-infinity-hostname>/auth/realms/avaya/protocol/openid-connect
 ### Request Example
 
 ```curl
-curl --location 'https://axp-dev-playground.ixcc-sandbox.avayacloud.com/auth/realms/avaya/protocol/openid-connect/token' \
+curl --location 'https://<avaya-infinity-hostname>/auth/realms/<account_id>/protocol/openid-connect/token' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode 'grant_type=custom_sdk_grant_type' \
---data-urlencode 'client_id=ten1-client1' \
---data-urlencode 'client_secret=NJQUtiUtzNTf9DrWs6sD44Ph7TvwtGLg' \
---data-urlencode 'integrationId=018d010305a09b0c39ec40c52c' \
+--data-urlencode 'client_id=<client-id>' \
+--data-urlencode 'client_secret=<client-secret>' \
+--data-urlencode 'integrationId=<integration-id>' \
 --data-urlencode 'customerId=jhondoe01234' \
 --data-urlencode 'customerName=John Doe' \
---data-urlencode 'customerIdentifiers={ "emailAddresses": ["john@example.com"], "phoneNumbers": ["+91 20 1234 5678"] }' \
+--data-urlencode 'customerIdentifiers={ "emailAddresses": ["john@example.com"], "phoneNumbers": ["+91 20 1234 5678"] }'
 ```
 
 ## Response
@@ -80,7 +80,7 @@ curl --location 'https://axp-dev-playground.ixcc-sandbox.avayacloud.com/auth/rea
 
 ```json
 {
-    "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrb196ZDFTSnR2RzhxNHAtYlZYWExJMkdkZWZZNDBkSFg0NjdlZHhGeXpVIn0.eyJleHAiOjE3NDk4MDMxOTEsImlhdCI6MTc0OTgwMjU5MSwianRpIjoiMjBjMmMyNmEtZDEyNi00N2IwLWI5NTktM2UzNWM0YzUwNTdmIiwiaXNzIjoiaHR0cHM6Ly9heHAtZGV2LXBsYXlncm91bmQuaXhjYy1zYW5kYm94LmF2YXlhY2xvdWQuY29tL2F1dGgvcmVhbG1zL2F2YXlhIiwic3ViIjoiamhvbmRvZTAxMjM0NSIsInR5cCI6IkJlYXJlciIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJzZGstdXNlciJdfSwib3JnYW5pemF0aW9uIjpbIjAwMWQwMTAyMjA1NDg0OTM5OTA4OGE4MWFkIl0sImN1c3RvbWVySWQiOiJqaG9uZG9lMDEyMzQ1IiwiaW50ZWdyYXRpb25JZCI6IjAxOGQwMTAzMDVhMDliMGMzOWVjNDBjNTJjIn0.VfYmXSnxciVRRPC_qitMpMaGAvpQtb3002x-tnkVNQCvxjFP6cf8sRSlCg0dnSzJDw5ndo8v7qCvy6TB5SxpwS2Dh7f3coUEGuom4KE6KNm78cMIGL8PyOzrAvMsU91BD3ePbRUqlZdUf6Ng6pyILkvAvqtE3KE6clSm-F18GSt2KfYMu5Wxx0Bd0kvECTbv2ySV5Uov__UrN3v6GgBeX5mRTLI0-nLxgEe4NFXrz_zmD33vsnRG6MF-TVDkfGS7DeCgZ-4s3rNuhEDKvedsXkHCScvdELfACJX40GGXlyjcMr6SZnSuypIr4cDjGfgz75_zDzaTsNI4pkpPvTfyaw",
+    "access_token": "eyJhbGciOiJSUzI1....",
     "expires_in": 600,
     "refresh_expires_in": 0,
     "token_type": "Bearer",
@@ -124,7 +124,7 @@ The type of users using your client application can be broadly classified into t
 
 - **Logged-in Users**: These users would have a unique identifier in your backend system, like a user ID or email address or phone number.
   
-  - If the unique identifier is a sensitive information like the email address or the phone number, it is recomended to generate a separate identifer based on this identifier and use it as the `customerId` when generating the JWT. Ensure this identifier remains consistent for the same user across different sessions so that Avaya Infinity™ can trace the user seamlessly. For example, generating a one-way hash of the sensitive identifier will ensure that the resultant value always remains constant for the same user across different sessions for the same user.
+  - If the unique identifier is a sensitive information like the email address or the phone number, it is recommended to generate a separate identifier based on this identifier and use it as the `customerId` when generating the JWT. Ensure this identifier remains consistent for the same user across different sessions so that Avaya Infinity™ can trace the user seamlessly. For example, generating a one-way hash of the sensitive identifier will ensure that the resultant value always remains constant for the same user across different sessions for the same user.
   - If the unique identifier is not sensitive, you can use it directly as the `customerId` when generating the JWT.
 
 - **Guest Users**: These users do not have a unique identifier in your backend system. You can generate a random identifier for them as the `customerId` when generating the JWT.
