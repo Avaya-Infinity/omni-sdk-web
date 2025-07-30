@@ -129,4 +129,4 @@ The type of users using your client application can be broadly classified into t
 
 - **Guest Users**: These users do not have a unique identifier in your backend system. You can generate a random identifier for them as the `customerId` when generating the JWT.
 
-The JWT is short lived and expires after 10 minutes. Your client application must implement the `JwtProvider` interface of the Omni SDK. The 'fetchJwt()' method of this interface will be invoked by the Omni SDK 3 minutes before the token is about to expire so that your application can request your backend web application for a new token and return it back to the Omni SDK.
+The JWT is short lived and expires after 10 minutes. Your client application must implement the [`JwtProvider`](https://avaya-infinity.github.io/omni-sdk-web/interfaces/_avaya_infinity_omni_sdk_messaging_ui.JwtProvider.html) interface of the Omni SDK. The 'fetchJwt()' method of this interface will be invoked by the Omni SDK 3 minutes before the token is about to expire so that your application can request your backend web application for a new token and return it back to the Omni SDK.
