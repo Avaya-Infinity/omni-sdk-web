@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.0.1 (Nov 18, 2025)
+
+- Multiple bug fixes and translation improvements.
+
 ## v1.0.0 (June 24, 2025)
 
 - Introduction of Avaya Infinity Omni SDK modules to support web chat capabilities
