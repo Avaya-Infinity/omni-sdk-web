@@ -1,6 +1,6 @@
 {
   "name": "@avaya/infinity-sample-app-messaging",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "src/index.ts",
   "scripts": {
@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@avaya/infinity-omni-sdk-messaging-ui": "^1.0.1",
+    "@avaya/infinity-omni-sdk-messaging-ui": "^1.0.2",
     "uuid": "^11.0.1"
   },
   "devDependencies": {
