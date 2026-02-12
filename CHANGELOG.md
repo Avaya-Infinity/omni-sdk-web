@@ -1,5 +1,11 @@
 # Change Log
 
+## v1.0.3 (Feb 10, 2025)
+
+- Added Korean language support (ko) and updated other locales.
+- Added support for Reply button inactivity customization option using QuickReplyButtonConfig.
+- Minor bug fixes
+
 ## v1.0.2 (Dec 12, 2025)
 
 - Added support for Italian language and updated other locales.
