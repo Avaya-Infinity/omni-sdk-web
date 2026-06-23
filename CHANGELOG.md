@@ -1,5 +1,14 @@
 # Change Log
 
+## v1.0.4 ()
+
+- Added Dutch language support (nl) and updated other locales.
+- Added support for admin-configurable canned message templates with text, reply buttons, and link buttons.
+- Added delivery acknowledgment for Bot and Agent messages.
+- Added Proactive Chat features - Bubble Teaser and Auto Popup.
+- Added admin-configurable assistant branding with custom name and external avatar URLs for bot/system messages
+- Multiple dependency version upgrades to remove vulnurablities and minor bug fixes.
+
 ## v1.0.3 (Feb 10, 2025)
 
 - Added Korean language support (ko) and updated other locales.
@@ -21,7 +30,6 @@
 ## v1.0.0 (June 24, 2025)
 
 - Introduction of Avaya Infinity Omni SDK modules to support web chat capabilities
-
   - Omni SDK Core
   - Omni SDK Messaging
   - Omni SDK Messaging UI
