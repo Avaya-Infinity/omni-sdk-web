@@ -1,6 +1,6 @@
 # Change Log
 
-## v1.0.4 ()
+## v1.0.4 (Jul 10, 2026)
 
 - Added Dutch language support (nl) and updated other locales.
 - Added support for admin-configurable canned message templates with text, reply buttons, and link buttons.
@@ -9,7 +9,7 @@
 - Added admin-configurable assistant branding with custom name and external avatar URLs for bot/system messages
 - Multiple dependency version upgrades to remove vulnurablities and minor bug fixes.
 
-## v1.0.3 (Feb 10, 2025)
+## v1.0.3 (Feb 10, 2026)
 
 - Added Korean language support (ko) and updated other locales.
 - Added support for Reply button inactivity customization option using QuickReplyButtonConfig.
