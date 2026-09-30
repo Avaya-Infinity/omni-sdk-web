@@ -59,13 +59,16 @@ As stated above the Avaya Infinity™ Omni SDK Messaging UI requires some config
 
 **Example:**
 
-```js
- const messagingUiConfig = {
+```ts
+import { LogLevel } from '@avaya/infinity-omni-sdk-messaging-ui';
+
+const messagingUiConfig = {
     host: "<Avaya Infinity Hostname>",
     integrationId: "<Web Chat Integration Id>",
+    logLevel: LogLevel.INFO,
     // Other optional configurations are omitted for brevity.
     // Please refer to 'MessagingUiConfig' type for more details.
- };
+};
 ```
 
 #### Configuration options
@@ -91,6 +94,10 @@ The Avaya Infinity™ Omni SDK Messaging UI supports following configuration opt
 | `emojiMartTranslations`            | `Record<Locale,EmojiMartTranslation>`        | Optional          | Messaging UI uses [Emoji Mart](https://github.com/missive/emoji-mart) Component as emoji picker. This configuration expects an object containing the display strings and their translations to be used for the emoji mart component.                                                             |
 | `themeCustomizations`              | `Record<string, MessagingUiTheme>` | Optional          | An object containing the theme customizations for the Messaging UI. Each key is a theme name and the value is the customizations for that theme. See [theme customization](#theme-customization) section.                                                                                        |
 | `initialTheme`                     | `string`                                     | Optional          | Name of the initial theme to be applied out of the themes provided via the `themeCustomizations` configuration for the Messaging UI.                                                                                                                                                                |
+
+> [!NOTE]
+>
+> `logLevel` is part of `MessagingUiConfig`, which is passed to `AvayaInfinityOmniSdkMessagingUi.load()`. It is not part of `MessagingUiInitParams`. If omitted, the log level defaults to `LogLevel.WARN`; after loading, it can be changed with `AvayaInfinityOmniSdkMessagingUi.setLogLevel()`.
 
 ### Load Messaging UI
 
@@ -131,7 +138,7 @@ window.onload = () => {
 
 The Messaging UI doesn't authenticate the User. It expects the User to be authenticated by your website and its backend web application. The Messaging UI uses JSON Web Tokens (JWT) and requires a valid JWT to function. The JWT is obtained from your own backend web application that communicates with Avaya Infinity™ platform's authentication API.
 
-The Messaging UI expects an implementation of the [`JwtProvider`](https://avaya-infinity.github.io/omni-sdk-web/interfaces/_avaya_infinity_omni_sdk_messaging_ui.JwtProvider.html) interface to be provided during [initialization](#initialization). The implementation of this interface must implement these methods:
+The Messaging UI expects an implementation of the [`JwtProvider`](https://avaya-infinity.github.io/omni-sdk-web/interfaces/_avaya_infinity-omni-sdk-messaging-ui.JwtProvider.html) interface to be provided during [initialization](#initialization). The implementation of this interface must implement these methods:
 
 1. `onExpiryWarning`: This method will be invoked to notify that the JWT is about to expire. It provides the remaining time before expiration. Your implementation should ideally use this time to fetch a new JWT and set it in the Messaging UI to maintain a seamless user experience.
 2. `onExpiry`: This method will be invoked to notify that the JWT has expired and the services provided by Messaging UI have been disrupted. When invoked, fetch a new JWT and immediately set it in Messaging UI to resume its services.
@@ -290,9 +297,9 @@ The Messaging UI provides a static method `resetIdleTimeout()` on the class `Ava
 
 The Messaging UI provides an option to customize the display strings used in the UI. This can be done by providing the `displayStrings` configuration during [configuration](#configuration).
 
-Check out the [`DisplayStrings`](https://avaya-infinity.github.io/omni-sdk-web/types/_avaya_infinity_omni_sdk_messaging_ui.DisplayStrings.html) type exported by the Messaging UI to know the strings that can be customized.
+Check out the [`DisplayStrings`](https://avaya-infinity.github.io/omni-sdk-web/types/_avaya_infinity-omni-sdk-messaging-ui.DisplayStrings.html) type exported by the Messaging UI to know the strings that can be customized.
 
-The `displayNames` property of the `DisplayStrings` can take either [`TextConfig`](https://avaya-infinity.github.io/omni-sdk-web/types/_avaya_infinity_omni_sdk_messaging_ui.TextConfig.html) or [`displayNameModifier`](https://avaya-infinity.github.io/omni-sdk-web/types/_avaya_infinity_omni_sdk_messaging_ui.DisplayNameModifier.html) callback function as a value for each of the participants. This function provides participant name as the parameter and expects a string in return.
+The `displayNames` property of the `DisplayStrings` can take either [`TextConfig`](https://avaya-infinity.github.io/omni-sdk-web/types/_avaya_infinity-omni-sdk-messaging-ui.TextConfig.html) or [`displayNameModifier`](https://avaya-infinity.github.io/omni-sdk-web/types/_avaya_infinity-omni-sdk-messaging-ui.DisplayNameModifier.html) callback function as a value for each of the participants. This function provides participant name as the parameter and expects a string in return.
 
 The locale of the messaging UI can be changed by calling the static method `setLocale()` on the class `AvayaInfinityOmniSdkMessagingUi`, which takes the locale string as an argument.
 
@@ -319,10 +326,25 @@ Themes can be changed at runtime by calling the static method `applyTheme()` on 
 
 You can switch back to the default theme by calling the static method `applyDefaultTheme()` on the class `AvayaInfinityOmniSdkMessagingUi`.
 
-The [`MessagingUiTheme`](https://avaya-infinity.github.io/omni-sdk-web/types/_avaya_infinity_omni_sdk_messaging_ui.MessagingUiTheme.html) type exported by the Messaging UI provides the structure of the theme object and all available options that can be changed. The options are organized by the various areas in the UI.
+The [`MessagingUiTheme`](https://avaya-infinity.github.io/omni-sdk-web/types/_avaya_infinity-omni-sdk-messaging-ui.MessagingUiTheme.html) type exported by the Messaging UI provides the structure of the theme object and all available options that can be changed. The options are organized by the various areas in the UI.
+
+> [!WARNING]
+>
+> DEPRECATION NOTICE for Legacy Neo Icons compatibility
+>
+> Going forward, Messaging UI will uses its own bundled SVG icons by default instead of relying on the Neo library. Custom image URLs can still be supplied through the theme's icon source properties and stay as the primary way to supply custom the icons to the Messaging UI. For backward compatibility, the older `neo-icon-*` values are still accepted. However, these are deprecated and will be removed in the next major release. New themes should use custom image URLs, and any existing custom themes should migrate to using custom image URLs if customizing icons is desired.
+
+<!-- -->
 
 > [!NOTE]
+>
 > Browsers on iOS devices may auto zoom on the input fields if their fontSize is less than `16px`. To avoid this behavior, the `fontSize` of the `textInput` field in the theme configuration should be set to `16px` or more.
+
+<!-- -->
+
+> [!NOTE]
+>
+> The Messaging UI uses "Noto Sans" as its default font. To make sure the font is available to the Messaging UI, it inserts a link tag to the website's document head to fetches this font from Google Fonts.
 
 #### Typing indicator customization
 
@@ -364,9 +386,58 @@ The Messaging UI provides the following methods on `AvayaInfinityOmniSdkMessagin
 The Messaging UI provides the following static methods on `AvayaInfinityOmniSdkMessagingUi` class:
 
 - `setLogLevel()` : Sets the log level for the Messaging UI.
+- `getRawLogs()`: Returns up to the 2,000 most recent buffered SDK logs as an array in chronological order. After the buffer reaches capacity, each new entry replaces the oldest entry.
+- `exportLogs()`: Returns the same buffered SDK logs, including export metadata, as a JSON `Blob`. This method does not initiate a download.
 - `setShutdownListener()`: Sets the event handler callback that needs to be invoked when the Messaging UI is shutdown. This method will override the event handler callback that was provided in the configuration object passed to the `AvayaInfinityOmniSdkMessagingUi.load()` method.
 - `setIdleTimeOutInvokedListener()`: Sets the event handler callback that needs to be invoked when the idle timeout is reached. This method will override the event handler callback that was provided in the configuration object passed to the `AvayaInfinityOmniSdkMessagingUi.load()` method.
 - `setInitializedListener()`: Sets the event handler callback that needs to be invoked when the Messaging UI is initialized. This method will override the event handler callback that was provided in the configuration object passed to the `AvayaInfinityOmniSdkMessagingUi.load()` method.
 - `clearShutdownListener()`: Clears the event handler callback that was attached to the Messaging UI shutdown event. This method will remove the event handler callback that was previously configured.
 - `clearIdleTimeOutInvokedListener()`: Clears the event handler callback that was attached to the Messaging UI idle timeout event. This method will remove the event handler callback that was previously configured.
 - `clearInitializedListener()`: Clears the event handler callback that was attached to the Messaging UI initialization event. This method will remove the event handler callback that was previously configured.
+
+#### Accessing logs
+
+The Omni SDK keeps up to the 2,000 most recent SDK log entries in memory. The shared buffer includes logs emitted by the Messaging UI, Core and other included SDK modules.
+
+Use `getRawLogs()` when the application needs to inspect or process the buffered log entries directly. The buffer retains up to 2,000 entries in chronological order; after it reaches capacity, each new entry replaces the oldest entry:
+
+```ts
+const logs = AvayaInfinityOmniSdkMessagingUi.getRawLogs();
+```
+
+Use `exportLogs()` to obtain a JSON `Blob` suitable for uploading, storing, or downloading. The calling application is responsible for initiating a download if needed:
+
+```ts
+const logsBlob = AvayaInfinityOmniSdkMessagingUi.exportLogs();
+```
+
+## Error handling
+
+Like the Core module, errors raised by the Messaging UI are also instances of `AvayaInfinityOmniSdkError`. The error's stable `code` identifies the category of failure, while `detail` can provide a more specific diagnostic reason. Applications should branch on `code` rather than matching the human-readable `message`. See the Error Handling section of the [Omni SDK Core documentation](https://avaya-infinity.github.io/omni-sdk-web/modules/_avaya_infinity-omni-sdk-core.html) for the shape of the error and its properties.
+
+```ts
+import { AvayaInfinityOmniSdkError, AvayaInfinityOmniSdkMessagingUi } from '@avaya/infinity-omni-sdk-messaging-ui';
+
+try {
+    await AvayaInfinityOmniSdkMessagingUi.load(messagingUiConfig, token);
+} catch (error) {
+    if (AvayaInfinityOmniSdkError.is(error)) {
+        switch (error.code) {
+            case "OSE_MSG_UI_ALREADY_LOADED":
+                // Reuse the Messaging UI instance that is already loaded.
+                break;
+            case "OSE_MSG_UI_INVALID_CONFIG":
+                // Correct the configuration before loading again.
+                break;
+            default:
+                console.error(error.message, error.detail, error.metadata);
+        }
+    } else {
+        throw error;
+    }
+}
+```
+
+### Messaging UI error codes
+
+The exported `MessagingUiErrorCodes` object contains the full set of error codes that the Messaging UI module can raise, where each entry is documented with the failure it represents. Every Messaging UI error code is prefixed `OSE_MSG_UI_`, so codes from other packages never collide with them.

@@ -1,5 +1,19 @@
 # Change Log
 
+## v1.0.5 (Sept 30, 2026)
+
+- Introduced `AvayaInfinityOmniSdkError` and module-specific error codes across Core, Messaging, and Messaging UI modules.
+- Added `getRawLogs()` and `exportLogs()` to Core and Messaging UI for accessing and exporting buffered SDK logs.
+- Added `isMessagingTranscriptAvailable` to Messaging conversation for checking transcript availability before download.
+- Added `downloadTranscriptUnavailabilityTooltip` to Messaging UI DisplayStrings.
+- Added Shadow DOM support to Messaging UI for providing CSS isolation and prevent CSS bleeding.
+- Added Polish and Romanian language support to Messaging UI.
+- Multiple bug fixes and logging improvements across all modules.
+
+Deprecation Notice:
+
+- Using Neo icon names as custom icons i.e. using `neo-icon-*` as values for `iconSource` and similar fields in `MessagingUiTheme` are deprecated and will be removed in next major release. Use image URLs instead.
+
 ## v1.0.4 (Jul 10, 2026)
 
 - Added Dutch language support (nl) and updated other locales.

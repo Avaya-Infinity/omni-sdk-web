@@ -115,6 +115,10 @@ Each module is packaged as a separate library. You can select the modules that a
 
   If you want to integrate your own Chat UI with Avaya Infinity™, you need to include the **[Messaging](#messaging)** module, which will automatically include the **[Core](#core)** module as a dependency.
 
+## Supported Browsers
+
+The Agent SDK requires browsers that support at least ECMAScript 2022 or newer.
+
 ## License
 
 View [LICENSE](https://support.avaya.com/css/public/documents/101038288)

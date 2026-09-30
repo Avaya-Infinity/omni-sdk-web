@@ -1,0 +1,81 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>CoreErrorCodes | Avaya Infinity Omni SDK</title><meta name="description" content="Documentation for Avaya Infinity Omni SDK"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container"><a href="../index.html" class="title">Avaya Infinity Omni SDK</a>
+<div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/>
+<ul role="listbox" id="tsd-search-results"></ul>
+<div id="tsd-search-status" aria-live="polite" aria-atomic="true">
+<div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-menu"></use></svg></a></div></header>
+<div class="container container-main">
+<div class="col-content">
+<div class="tsd-page-title">
+<ul class="tsd-breadcrumb" aria-label="Breadcrumb">
+<li><a href="../modules/_avaya_infinity-omni-sdk-core.html">@avaya/infinity-omni-sdk-core</a></li>
+<li><a href="" aria-current="page">CoreErrorCodes</a></li></ul>
+<h1>Variable CoreErrorCodes<code class="tsd-tag">Const</code></h1></div>
+<div class="tsd-signature"><span class="tsd-kind-variable">CoreErrorCodes</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">CONVERSATION_NOT_ACTIVE</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;OSE_CORE_CONVERSATION_NOT_ACTIVE&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">CONVERSATIONS_NOT_CLOSABLE</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;OSE_CORE_CONVERSATIONS_NOT_CLOSABLE&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">CREATE_CONVERSATION_FAILED</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;OSE_CORE_CREATE_CONVERSATION_FAILED&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">INVALID_ARGUMENT</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;OSE_CORE_INVALID_ARGUMENT&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">INVALID_JWT</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;OSE_CORE_INVALID_JWT&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">MALFORMED_SERVER_RESPONSE</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;OSE_CORE_MALFORMED_SERVER_RESPONSE&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">MAX_CONVERSATIONS_REACHED</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;OSE_CORE_MAX_CONVERSATIONS_REACHED&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">SDK_BUSY</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;OSE_CORE_SDK_BUSY&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">SDK_INIT_FAILED</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;OSE_CORE_SDK_INIT_FAILED&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">SDK_NOT_INITIALIZED</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;OSE_CORE_SDK_NOT_INITIALIZED&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">SESSION_ENDED</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;OSE_CORE_SESSION_ENDED&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">SESSION_INITIALIZED_ALREADY</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;OSE_CORE_SESSION_INITIALIZED_ALREADY&quot;</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
+<div class="tsd-comment tsd-typography"><p>Codes for failures raised by the Core module.</p>
+<p>One code per distinct action a consumer can take in response. Several failures may share a
+same code; the error's <code>detail</code> field distinguishes them.</p>
+</div>
+<div class="tsd-type-declaration">
+<h4>Type Declaration</h4>
+<ul class="tsd-parameters">
+<li class="tsd-parameter">
+<h5 id="conversation_not_active"><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">CONVERSATION_NOT_ACTIVE</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;OSE_CORE_CONVERSATION_NOT_ACTIVE&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The operation is not valid for the current state of the conversation.</p>
+</div></li>
+<li class="tsd-parameter">
+<h5 id="conversations_not_closable"><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">CONVERSATIONS_NOT_CLOSABLE</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;OSE_CORE_CONVERSATIONS_NOT_CLOSABLE&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>Creating or ending conversations is not permitted for this integration.</p>
+</div></li>
+<li class="tsd-parameter">
+<h5 id="create_conversation_failed"><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">CREATE_CONVERSATION_FAILED</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;OSE_CORE_CREATE_CONVERSATION_FAILED&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The conversation could not be created.</p>
+</div></li>
+<li class="tsd-parameter">
+<h5 id="invalid_argument"><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">INVALID_ARGUMENT</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;OSE_CORE_INVALID_ARGUMENT&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>A supplied argument was rejected.</p>
+</div></li>
+<li class="tsd-parameter">
+<h5 id="invalid_jwt"><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">INVALID_JWT</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;OSE_CORE_INVALID_JWT&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The supplied JWT was rejected.</p>
+</div></li>
+<li class="tsd-parameter">
+<h5 id="malformed_server_response"><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">MALFORMED_SERVER_RESPONSE</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;OSE_CORE_MALFORMED_SERVER_RESPONSE&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The server returned a response the SDK could not act on.</p>
+</div></li>
+<li class="tsd-parameter">
+<h5 id="max_conversations_reached"><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">MAX_CONVERSATIONS_REACHED</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;OSE_CORE_MAX_CONVERSATIONS_REACHED&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>No further conversations can be created until an existing one ends.</p>
+</div></li>
+<li class="tsd-parameter">
+<h5 id="sdk_busy"><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">SDK_BUSY</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;OSE_CORE_SDK_BUSY&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>Initialization or shutdown is in flight; wait for it to settle.</p>
+</div></li>
+<li class="tsd-parameter">
+<h5 id="sdk_init_failed"><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">SDK_INIT_FAILED</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;OSE_CORE_SDK_INIT_FAILED&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The SDK could not be initialized.</p>
+</div></li>
+<li class="tsd-parameter">
+<h5 id="sdk_not_initialized"><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">SDK_NOT_INITIALIZED</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;OSE_CORE_SDK_NOT_INITIALIZED&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>An operation was attempted before the SDK was initialized.</p>
+</div></li>
+<li class="tsd-parameter">
+<h5 id="session_ended"><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">SESSION_ENDED</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;OSE_CORE_SESSION_ENDED&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The session is no longer usable and the SDK must be initialized again.</p>
+</div></li>
+<li class="tsd-parameter">
+<h5 id="session_initialized_already"><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">SESSION_INITIALIZED_ALREADY</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;OSE_CORE_SESSION_INITIALIZED_ALREADY&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>Initialization was attempted while a session was already active.</p>
+</div></li></ul></div></div>
+<div class="col-sidebar">
+<div class="page-menu">
+<div class="tsd-navigation settings">
+<details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h3>Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div></div>
+<div class="site-menu">
+<nav class="tsd-navigation"><a href="../modules.html">Avaya Infinity Omni SDK</a>
+<ul class="tsd-small-nested-navigation" id="tsd-nav-container">
+<li>Loading...</li></ul></nav></div></div></div><footer></footer>
+<div class="overlay"></div></body></html>
