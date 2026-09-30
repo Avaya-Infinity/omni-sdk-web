@@ -27,9 +27,13 @@ npm install --save @avaya/infinity-omni-sdk-messaging
 
 This will install both Omni SDK Core and Omni SDK Messaging.
 
+> [!NOTE]
+>
+> Always use matching versions of all Omni SDK modules to ensure compatibility.
+
 ## Usage
 
-The Omni SDK Messaging module provides the [`MessagingConversation`](https://avaya-infinity.github.io/omni-sdk-web/functions/_avaya_infinity_omni_sdk_messaging.MessagingConversation.html) [mixin](https://www.typescriptlang.org/docs/handbook/mixins.html) that extends the Base Conversation of the Omni SDK Core module with Messaging capabilities. To use the Messaging module, you need to import the `MessagingConversation` mixin function and apply it. Check out more details about additional functionalities in the `Using additional functionality` section of The [Omni SDK Core's documentation](./core.md).
+The Omni SDK Messaging module provides the [`MessagingConversation`](https://avaya-infinity.github.io/omni-sdk-web/functions/_avaya_infinity-omni-sdk-messaging.MessagingConversation.html) [mixin](https://www.typescriptlang.org/docs/handbook/mixins.html) that extends the Base Conversation of the Omni SDK Core module with Messaging capabilities. To use the Messaging module, you need to import the `MessagingConversation` mixin function and apply it. Check out more details about additional functionalities in the `Using additional functionality` section of The [Omni SDK Core's documentation](./core.md).
 
 Example of how to use Omni SDK Messaging module:
 
@@ -52,7 +56,7 @@ defaultConversation.sendMessage(...); // <-- Omni SDK Messaging method
 
 ## Messaging Conversation
 
-The Messaging Conversation provides APIs to send and receive rich media and attachment messages, get conversation history, listen to message events and get the messaging transcript. For more details on the APIs exposed on the Messaging Conversation, refer to the [`MessagingConversationTrait`](https://avaya-infinity.github.io/omni-sdk-web/interfaces/_avaya_infinity_omni_sdk_messaging.MessagingConversationTrait.html) interface.
+The Messaging Conversation provides APIs to send and receive rich media and attachment messages, get conversation history, listen to message events and get the messaging transcript. For more details on the APIs exposed on the Messaging Conversation, refer to the [`MessagingConversationTrait`](https://avaya-infinity.github.io/omni-sdk-web/interfaces/_avaya_infinity-omni-sdk-messaging.MessagingConversationTrait.html) interface.
 
 ### Getting conversation history
 
@@ -63,7 +67,7 @@ To get the conversation history, use the `getMessages()` method on the Conversat
 
 Each Page of the iterator contains a list of messages. Pages with higher page number will contain older messages. The iterator can be used to get messages in both directions (forward and backward).
 
-The `PageIterator.previous()` and `PageIterator.next()` are async methods, when called they fetch the previous and next page of messages respectively and each resolves with an Array of [`Message`](https://avaya-infinity.github.io/omni-sdk-web/types/_avaya_infinity_omni_sdk_messaging.Message.html). The `PageIterator.hasNext()` and `PageIterator.hasPrevious()` methods check if there are more messages in the next and previous pages, respectively.
+The `PageIterator.previous()` and `PageIterator.next()` are async methods, when called they fetch the previous and next page of messages respectively and each resolves with an Array of [`Message`](https://avaya-infinity.github.io/omni-sdk-web/types/_avaya_infinity-omni-sdk-messaging.Message.html). The `PageIterator.hasNext()` and `PageIterator.hasPrevious()` methods check if there are more messages in the next and previous pages, respectively.
 
 At any point `PageIterator.items` can be used to get the messages on the current page.
 
@@ -151,11 +155,11 @@ sendAttachmentButton.onclick = function () {
 
 ### Waiting for message to be sent
 
-The `sendMessage()` API returns a `Promise` that resolves with the [`Message`](https://avaya-infinity.github.io/omni-sdk-web/types/_avaya_infinity_omni_sdk_messaging.Message.html) object corresponding to the message that sent. This object contains unique `messageId` of this message and other details.
+The `sendMessage()` API returns a `Promise` that resolves with the [`Message`](https://avaya-infinity.github.io/omni-sdk-web/types/_avaya_infinity-omni-sdk-messaging.Message.html) object corresponding to the message that sent. This object contains unique `messageId` of this message and other details.
 
 ### Message delivery
 
-The Client must listen to the the Message Delivered event to be notified when the messages that were sent by the User are delivered to the Avaya Infinity™ platform. To do so the Client use the `addMessageDeliveredListener()` method on the Conversation object to register the Message Delivered event listener. The `addMessageDeliveredListener()` method takes a function as the argument. This function will be called with the [`MessageEvent`](https://avaya-infinity.github.io/omni-sdk-web/interfaces/_avaya_infinity_omni_sdk_messaging.MessageEvent.html) object corresponding to the message that was sent. The `MessageEvent` object contains unique `messageId` of this message and other details.
+The Client must listen to the the Message Delivered event to be notified when the messages that were sent by the User are delivered to the Avaya Infinity™ platform. To do so the Client use the `addMessageDeliveredListener()` method on the Conversation object to register the Message Delivered event listener. The `addMessageDeliveredListener()` method takes a function as the argument. This function will be called with the [`MessageEvent`](https://avaya-infinity.github.io/omni-sdk-web/interfaces/_avaya_infinity-omni-sdk-messaging.MessageEvent.html) object corresponding to the message that was sent. The `MessageEvent` object contains unique `messageId` of this message and other details.
 
 ```ts
 function showTickOnUI(message) {
@@ -170,7 +174,7 @@ conversation.addMessageDeliveredListener((message) => {
 
 ### Receiving messages
 
-The Client must listen to the the Message Arrived event to be notified when the messages are received from the Agent. To do so the Client use the `addMessageArrivedListener()` method on the Conversation object to register the Message Arrived event listener. The `addMessageArrivedListener()` method takes a function as the argument. This function will be called with the [`MessageEvent`](https://avaya-infinity.github.io/omni-sdk-web/interfaces/_avaya_infinity_omni_sdk_messaging.MessageEvent.html) object corresponding to the message that received. The `MessageEvent` object contains the unique `messageId` and body of the message sent by the Agent.
+The Client must listen to the the Message Arrived event to be notified when the messages are received from the Agent. To do so the Client use the `addMessageArrivedListener()` method on the Conversation object to register the Message Arrived event listener. The `addMessageArrivedListener()` method takes a function as the argument. This function will be called with the [`MessageEvent`](https://avaya-infinity.github.io/omni-sdk-web/interfaces/_avaya_infinity-omni-sdk-messaging.MessageEvent.html) object corresponding to the message that received. The `MessageEvent` object contains the unique `messageId` and body of the message sent by the Agent.
 
 ```ts
 function showMessagesOnUI(message) {
@@ -229,7 +233,7 @@ conversation.addTypingStoppedListener((typingStoppedEvent: TypingStopped) => {
 
 ## Avaya Infinity Messaging Namespace
 
-The Omni SDK Messaging module consists of [`AvayaInfinityMessaging`](https://avaya-infinity.github.io/omni-sdk-web/modules/_avaya_infinity_omni_sdk_messaging.AvayaInfinityMessaging.html) namespace which contains a set of APIs which aren't directly coupled to the concept of Messaging Conversation. This namespace consists of APIs and Events related to the networking model used by the Omni SDK Messaging to get messages and events from Avaya Infinity™ platform.
+The Omni SDK Messaging module consists of [`AvayaInfinityMessaging`](https://avaya-infinity.github.io/omni-sdk-web/modules/_avaya_infinity-omni-sdk-messaging.AvayaInfinityMessaging.html) namespace which contains a set of APIs which aren't directly coupled to the concept of Messaging Conversation. This namespace consists of APIs and Events related to the networking model used by the Omni SDK Messaging to get messages and events from Avaya Infinity™ platform.
 
 During the session, the state of SDK’s connection with Avaya Infinity™ platform Servers can change. In all the cases the network state changes are notified in the form of events. The Client can subscribe to these events for handling the changes in network.
 
@@ -286,3 +290,42 @@ If the manual retry is successful, the Client will be notified via the Event Str
 Calling `retryConnection()` method when the SDK is disconnected but within the reconnection window will just reset the delay interval between the subsequent attempts and will attempt to reconnect immediately.
 
 Calling `retryConnection()` method when the SDK is not disconnected will throw an Error.
+
+## Error Handling
+
+Like the Core module, errors raised by the Messaging module are also instances of `AvayaInfinityOmniSdkError`. See the Error Handling section of the [Omni SDK Core documentation](https://avaya-infinity.github.io/omni-sdk-web/modules/_avaya_infinity-omni-sdk-core.html) for the shape of the error and its properties.
+
+Messaging errors surface as rejected promises from methods such as `sendMessage()`, `getMessages()` and the transcript APIs, and as thrown errors from synchronous methods such as `notifyUserTyping()`.
+
+### Reacting to an error
+
+Branch on `code`, comparing against the `MessagingErrorCodes` constant:
+
+```ts
+import { MessagingErrorCodes, isMessagingError } from "@avaya/infinity-omni-sdk-messaging";
+
+try {
+    await conversation.sendMessage(new TextMessage("Hi"));
+} catch (error) {
+    if (isMessagingError(error)) {
+        switch (error.code) {
+            case MessagingErrorCodes.ATTACHMENT_REJECTED:
+                // The attachment was refused - tell the user to pick another file.
+                break;
+            case MessagingErrorCodes.SESSION_ENDED:
+                // The session is gone - initialize the SDK again.
+                break;
+            default:
+                console.error(error.message, error.metadata);
+        }
+    } else {
+        throw error;
+    }
+}
+```
+
+`isMessagingError()` is a type predicate which can be used to narrow the error value to an `AvayaInfinityOmniSdkError` that was raised by the Messaging module. Use the `AvayaInfinityOmniSdkError.is()` from the Core module instead when you want to accept an error from any Omni SDK module.
+
+### Messaging error codes
+
+The exported `MessagingErrorCodes` object contains the full set of error codes that the Messaging module can raise, where each entry is documented with the failure it represents. Every Messaging module error code is prefixed `OSE_MSG_`, so codes from other packages never collide with them.

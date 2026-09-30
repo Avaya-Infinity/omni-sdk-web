@@ -36,6 +36,10 @@ List of currently available additional functionalities:
 
 - [Omni SDK Messaging](./messaging.md)
 
+> [!NOTE]
+>
+> Always use matching versions of all Omni SDK modules to ensure compatibility.
+
 #### How to use the additional functionalities
 
 To use the additional functionalities, the Client has to install the additional functionality module (refer to the installation instructions of each additional functionality module for more details).
@@ -59,7 +63,7 @@ const userSession = await AvayaInfinityOmniSdk.init(..., EnhancedConversationCla
 
 The Avaya Infinity Omni SDK uses JSON Web Tokens (JWT) for client authentication and requires a valid JWT to function. The JWT is obtained from your own backend web application that communicates with Avaya Infinity™ platform's authentication API.
 
-The SDK expects an implementation of the [`JwtProvider`](https://avaya-infinity.github.io/omni-sdk-web/interfaces/_avaya_infinity_omni_sdk_core.JwtProvider.html) interface to be provided during [initialization](#initialization). The implementation of this interface must implement these methods:
+The SDK expects an implementation of the [`JwtProvider`](https://avaya-infinity.github.io/omni-sdk-web/interfaces/_avaya_infinity-omni-sdk-core.JwtProvider.html) interface to be provided during [initialization](#initialization). The implementation of this interface must implement these methods:
 
 1. `onExpiryWarning`: This method is called when the JWT is about to expire. In the argument of this method, the remaining time in milliseconds before the JWT expires is provided.
 2. `onExpiry`: This method is called when the JWT has expired.
@@ -108,7 +112,7 @@ Initialization can be done by calling the static method `init()` on the class `A
 Initialization Example:
 
 ```typescript
-import { AvayaInfinityOmniSdk } from '@avaya/infinity-omni-sdk-core';
+import { AvayaInfinityOmniSdk, LogLevel } from '@avaya/infinity-omni-sdk-core';
 import { MessagingConversation } from '@avaya/infinity-omni-sdk-messaging';
 
 const EnhancedConversationClass = MessagingConversation();
@@ -119,7 +123,7 @@ const initParams = {
     token: '<JWT>',
     jwtProvider: new MyJwtProvider(),
     displayName: 'John Doe',
-    logLevel: 'debug',
+    logLevel: LogLevel.DEBUG,
     idleTimeoutDuration: 5 * 60 * 1000, // in milliseconds
     idleShutdownGraceTimeoutDuration: 1 * 60 * 1000, // in milliseconds
 }
@@ -136,6 +140,7 @@ Being an `async` method, the Client can `await` on the promise returned by the `
 Alternatively, the SDK emits an initialized event after the SDK initialization has completed. The Client can listen to these events by providing a listener function to SDK.
 
 > [!IMPORTANT]
+>
 > In order to receive the initialized event, it is imperative to provide the listener function before calling the `init()` method.
 
 ```ts
@@ -308,9 +313,44 @@ function hideWarningBox() {
 }
 ```
 
+### Accessing and exporting logs
+
+The Omni SDK Core module keeps up to the 2,000 most recent SDK log entries in memory. The shared buffer includes logs emitted by Core and other included SDK modules.
+
+Set `logLevel` in the `InitParams` passed to `AvayaInfinityOmniSdk.init()` to configure logging during initialization. If `logLevel` is not set, it defaults to `LogLevel.WARN`. The level can be changed later by calling `AvayaInfinityOmniSdk.setLogLevel(logLevel)`.
+
+Use the `AvayaInfinityOmniSdk.getRawLogs()` to inspect or process a chronological snapshot of the buffered log entries:
+
+```ts
+const logs = AvayaInfinityOmniSdk.getRawLogs();
+```
+
+Use `exportLogs()` to create a JSON `Blob` containing the buffered entries and export metadata:
+
+```ts
+const logsBlob = AvayaInfinityOmniSdk.exportLogs();
+```
+
+Applications can use this to implement download logs functionality:
+
+```ts
+// Example for implementing download logs functionality in your App
+const logsBlob = AvayaInfinityOmniSdk.exportLogs();
+const downloadUrl = URL.createObjectURL(logsBlob);
+const link = document.createElement("a");
+
+link.href = downloadUrl;
+link.download = "avaya-infinity-omni-sdk-logs.json";
+document.body.append(link);
+link.click();
+
+link.remove();
+URL.revokeObjectURL(downloadUrl);
+```
+
 ### Shutting down the SDK
 
-The current user's session can be terminated by calling the `shutdown()` method of `AvayaInfinityOmniSdk`. This will end the session and cleanup all the corresponding data within the SDK. **Irrespective of the success or failure of the termination operation, the SDK cleanup will be performed.**
+The current user's session can be terminated by calling the `shutdown()` method of `AvayaInfinityOmniSdk`. This will end the session and cleanup all the corresponding data within the SDK, including the in-memory log buffer. **Irrespective of the success or failure of the termination operation, the SDK cleanup will be performed.**
 
 To shut down the SDK, call the `shutdown()` method on the `AvayaInfinityOmniSdk` class. The `shutdown()` method returns a `Promise` that resolves when the SDK has been successfully shut down.
 
@@ -329,3 +369,52 @@ AvayaInfinityOmniSdk.addSdkShutdownListener(() => {
     // ... your cleanup code.
 });
 ```
+
+## Error Handling
+
+Every error raised by the Omni SDK is an instance of `AvayaInfinityOmniSdkError`, this is a custom error class that extends the built-in `Error` adding a stable `code` and extra information on top of it. You can use the `code` to uniquely identify an error and act upon it as required. The error object contains following information:
+
+| Property   | Type                      | Description                                                                                          |
+| ---------- | ------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `code`     | `string`                  | Stable, machine-readable identifier. This is the part you should branch on.                          |
+| `message`  | `string`                  | Human-readable description, intended for logs. Do not match on this text - it can change.            |
+| `detail`   | `string \| undefined`     | Narrows down which specific condition produced a shared `code`. Diagnostic only; may change.         |
+| `metadata` | `object \| undefined`     | Extra context for diagnosis, such as an HTTP status.          |
+| `cause`    | `unknown`                 | The underlying error, when the failure was triggered by another one.                                 |
+
+Since, `AvayaInfinityOmniSdkError` extends the built-in `Error` class, all existing try/catch and instanceof Error checks keep working.
+
+### Reacting to an error
+
+Branch on `code`, comparing against the `CoreErrorCodes` constant rather than a hard-coded string:
+
+```ts
+import { AvayaInfinityOmniSdk, CoreErrorCodes, isCoreError } from "@avaya/infinity-omni-sdk-core";
+
+try {
+    await AvayaInfinityOmniSdk.createConversation();
+} catch (error) {
+    if (isCoreError(error)) {
+        switch (error.code) {
+            case CoreErrorCodes.MAX_CONVERSATIONS_REACHED:
+                // End the existing conversation before starting a new one.
+                break;
+            case CoreErrorCodes.SESSION_ENDED:
+                // The session is gone - initialize the SDK again.
+                break;
+            default:
+                console.error(error.message, error.metadata);
+        }
+    } else {
+        throw error;
+    }
+}
+```
+
+`isCoreError()` is a type predicate which can be used to narrow the error value to an `AvayaInfinityOmniSdkError` that was raised by the Core module. Use `AvayaInfinityOmniSdkError.is()` instead when you want to accept an error from any Omni SDK module.
+
+### Core error codes
+
+The exported `CoreErrorCodes` object contains the full set of error codes that the Core module can raise, where each entry is documented with the failure it represents. Every Core module error code is prefixed `OSE_CORE_`, so codes from other packages never collide with them.
+
+Errors that do not originate from the SDK like a network failure, or a bug in your own callback will propagate unchanged rather than being wrapped in an SDK error code.
