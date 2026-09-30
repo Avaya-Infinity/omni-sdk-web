@@ -1,6 +1,6 @@
 # Change Log
 
-## v1.0.5 (Sept 30, 2026)
+## v1.0.5 (Oct 1, 2026)
 
 - Introduced `AvayaInfinityOmniSdkError` and module-specific error codes across Core, Messaging, and Messaging UI modules.
 - Added `getRawLogs()` and `exportLogs()` to Core and Messaging UI for accessing and exporting buffered SDK logs.
