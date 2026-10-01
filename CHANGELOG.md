@@ -8,6 +8,7 @@
 - Added `downloadTranscriptUnavailabilityTooltip` to Messaging UI DisplayStrings.
 - Added Shadow DOM support to Messaging UI for providing CSS isolation and prevent CSS bleeding.
 - Added Polish and Romanian language support to Messaging UI.
+- Fixed bug: Download attachments / images and image previews not working
 - Multiple bug fixes and logging improvements across all modules.
 
 Deprecation Notice:
